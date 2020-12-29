@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.janpier.cursomc.domain.Categoria;
+import com.janpier.cursomc.domain.exception.ObjectException;
 import com.janpier.cursomc.repositories.CategoriaRepository;
 
 @Service
@@ -15,7 +16,7 @@ public class CategoriaService {
   private CategoriaRepository catRepo;
 
   public Categoria buscar (Integer id) {
-    Optional<Categoria> obj =  catRepo.findById(id);
-    return obj.orElse(null);
+    Optional<Categoria> obj =  catRepo.findById(id);    
+    return obj.orElseThrow(() -> new ObjectException("Objeto não encotrado! ID: " + id + " Tipo: " + Categoria.class.getName()));
   }
 }

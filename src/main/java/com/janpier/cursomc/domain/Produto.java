@@ -16,6 +16,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto implements Serializable{
   private static final long serialVersionUID = 1L;
@@ -24,6 +26,7 @@ public class Produto implements Serializable{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;  
   
+  @JsonBackReference
   @ManyToMany
   @JoinTable(name = "PRODUTO_CATEGORIA",
       joinColumns = @JoinColumn(name = "produto_id"),
